@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:the_ultimate_test/screens/main_screen.dart';
 import 'package:the_ultimate_test/utils/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:the_ultimate_test/utils/database.dart';
 
 class GoogleSignInButton extends StatefulWidget {
   @override
@@ -41,13 +42,10 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 });
 
                 if (user != null) {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => MainScreen(
-                        user: user,
-                      ),
-                    ),
-                  );
+                  //TODO: Add user if user email is not found in 'users' collection
+                  await new DatabaseService().addUser(user);
+                  Navigator.of(context)
+                      .pushReplacementNamed('/profile', arguments: user);
                 }
               },
               child: Padding(
@@ -56,10 +54,11 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    // Image(
-                    //   image: AssetImage("assets/google_logo.png"),
-                    //   height: 35.0,
-                    // ),
+                    SvgPicture.asset(
+                      "assets/icons/google.svg",
+                      height: 35.0,
+                      width: 35.0,
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(

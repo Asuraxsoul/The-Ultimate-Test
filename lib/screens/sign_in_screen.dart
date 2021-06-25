@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:the_ultimate_test/utils/authentication.dart';
 import 'package:the_ultimate_test/utils/constants.dart';
 import 'package:the_ultimate_test/widgets/google_sign_in_button.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -12,7 +13,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primaryColor,
+      backgroundColor: backgroundColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(
@@ -29,27 +30,40 @@ class _SignInScreenState extends State<SignInScreen> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Flexible(
-                    //   flex: 1,
-                    //   child: Image.asset(
-                    //     'assets/firebase_logo.png',
-                    //     height: 160,
-                    //   ),
-                    // ),
-                    SizedBox(height: 20),
-                    Text(
-                      'FlutterFire',
-                      style: TextStyle(
-                        color: firebaseYellow,
-                        fontSize: 40,
+                    Flexible(
+                      flex: 1,
+                      child: SvgPicture.asset(
+                        'assets/icons/strong.svg',
+                        width: 160,
+                        height: 160,
                       ),
                     ),
-                    Text(
-                      'Authentication',
-                      style: TextStyle(
-                        color: firebaseOrange,
-                        fontSize: 40,
-                      ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'The ',
+                          style: TextStyle(
+                            color: basicColorTeal,
+                            fontSize: 40,
+                          ),
+                        ),
+                        Text(
+                          'Ultimate ',
+                          style: TextStyle(
+                            color: basicColorPink,
+                            fontSize: 40,
+                          ),
+                        ),
+                        Text(
+                          'Test',
+                          style: TextStyle(
+                            color: basicColorTeal,
+                            fontSize: 40,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

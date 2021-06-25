@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:the_ultimate_test/screens/main_screen.dart';
+import 'package:the_ultimate_test/screens/profile_screen.dart';
 
 class Authentication {
   // Auto-login enabled
@@ -17,7 +17,7 @@ class Authentication {
     if (user != null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => MainScreen(
+          builder: (context) => ProfileScreen(
             user: user,
           ),
         ),

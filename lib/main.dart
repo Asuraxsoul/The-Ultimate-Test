@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_ultimate_test/screens/sign_in_screen.dart';
+import 'package:the_ultimate_test/utils/route_generator.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SignInScreen(),
+      initialRoute: '/splash',
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }
