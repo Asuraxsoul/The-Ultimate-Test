@@ -65,6 +65,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ],
                     ),
+                    SizedBox(height: 20),
+                    Text("Do you dare to take up the challenge?",
+                        style: TextStyle(fontSize: 16, color: Colors.grey)),
                   ],
                 ),
               ),
@@ -78,7 +81,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   }
                   return CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      firebaseOrange,
+                      basicColorLBlue,
                     ),
                   );
                 },

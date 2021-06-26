@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:the_ultimate_test/utils/constants.dart';
 import 'package:the_ultimate_test/widgets/reusable_header.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class TestScreen extends StatefulWidget {
   const TestScreen({Key? key}) : super(key: key);
@@ -23,16 +24,72 @@ class _TestScreenState extends State<TestScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               InkWell(
+                splashColor: basicColorPink,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
                 onTap: () {
                   Navigator.of(context).pushNamed('/climberTest');
                 },
-                child: Text("The Ultimate Climber Test"),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                    border: Border.all(color: basicColorPink),
+                  ),
+                  padding: EdgeInsets.all(defaultPadding),
+                  child: Column(
+                    children: [
+                      Text(
+                        "The Ultimate Climber Test",
+                        style: TextStyle(
+                          fontSize: 24,
+                        ),
+                      ),
+                      SizedBox(height: defaultPadding),
+                      SvgPicture.asset(
+                        'assets/icons/climbing.svg',
+                        height: 100,
+                        width: 100,
+                      ),
+                    ],
+                  ),
+                ),
               ),
               InkWell(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
                 onTap: () {
                   Navigator.of(context).pushNamed('/fbiTest');
                 },
-                child: Text("The Ultimate FBI Test"),
+                splashColor: basicColorGreen,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                    border: Border.all(color: basicColorGreen),
+                  ),
+                  padding: EdgeInsets.all(defaultPadding),
+                  child: Column(
+                    children: [
+                      Text(
+                        "The Ultimate FBI Test",
+                        style: TextStyle(
+                          fontSize: 24,
+                        ),
+                      ),
+                      SizedBox(height: defaultPadding),
+                      SvgPicture.asset(
+                        'assets/icons/fbi.svg',
+                        height: 100,
+                        width: 100,
+                      ),
+                    ],
+                  ),
+                ),
               ),
               Row(),
             ],
