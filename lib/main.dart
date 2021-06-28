@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:the_ultimate_test/utils/route_generator.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  SystemChrome.setEnabledSystemUIOverlays(
+      [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
   runApp(MyApp());
 }
 

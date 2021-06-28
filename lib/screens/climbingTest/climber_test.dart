@@ -46,8 +46,8 @@ class _ClimberTestScreenState extends State<ClimberTestScreen> {
                         "The Strength You Need To Climb 9C",
                         style: TextStyle(
                           fontSize: 26,
-                          color: Colors.pinkAccent,
-                          fontWeight: FontWeight.bold,
+                          color: basicColorPink,
+                          letterSpacing: 3.0,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -55,7 +55,7 @@ class _ClimberTestScreenState extends State<ClimberTestScreen> {
                         TextButton(
                           child: new Icon(
                             Icons.done,
-                            color: Colors.lightBlueAccent,
+                            color: basicColorLBlue,
                             size: 30,
                           ),
                           onPressed: () {
@@ -87,7 +87,7 @@ class _ClimberTestScreenState extends State<ClimberTestScreen> {
               SizedBox(height: 30),
               Text(
                 "Welcome to \nThe Ultimate Climber Test",
-                style: TextStyle(fontSize: 24, color: basicColorPurple),
+                style: TextStyle(fontSize: 24, color: basicColorBlue),
                 maxLines: 2,
                 textAlign: TextAlign.center,
               ),
@@ -95,8 +95,6 @@ class _ClimberTestScreenState extends State<ClimberTestScreen> {
               InkWell(
                 customBorder: CircleBorder(),
                 splashColor: basicColorLBlue,
-                onTap: () {},
-                onHover: (val) {},
                 child: Container(
                   padding: EdgeInsets.all(defaultPadding * 2),
                   decoration: BoxDecoration(
@@ -111,6 +109,9 @@ class _ClimberTestScreenState extends State<ClimberTestScreen> {
                     ),
                   ),
                 ),
+                onTap: () {
+                  Navigator.of(context).pushNamed('/climberTestSlider');
+                },
               ),
             ],
           ),

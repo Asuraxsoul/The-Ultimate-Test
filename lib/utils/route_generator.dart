@@ -4,7 +4,9 @@ import 'package:the_ultimate_test/screens/splash_screen.dart';
 import 'package:the_ultimate_test/screens/sign_in_screen.dart';
 import 'package:the_ultimate_test/screens/profile_screen.dart';
 import 'package:the_ultimate_test/screens/test.dart';
-import 'package:the_ultimate_test/screens/climber_test.dart';
+import 'package:the_ultimate_test/screens/climbingTest/climber_test.dart';
+import 'package:the_ultimate_test/screens/climbingTest/climber_test_slider.dart';
+import 'package:the_ultimate_test/screens/climbingTest/climber_test_result.dart';
 import 'package:the_ultimate_test/screens/fbi_test.dart';
 import 'package:the_ultimate_test/screens/achievements.dart';
 import 'package:the_ultimate_test/screens/more_info.dart';
@@ -34,6 +36,12 @@ class RouteGenerator {
 
       case '/climberTest':
         return MaterialPageRoute(builder: (_) => ClimberTestScreen());
+
+      case '/climberTestSlider':
+        return MaterialPageRoute(builder: (_) => ClimberTestSliderScreen());
+
+      case '/climberTestResult':
+        return MaterialPageRoute(builder: (_) => ClimberTestResultScreen());
 
       case '/fbiTest':
         return MaterialPageRoute(builder: (_) => FbiTestScreen());

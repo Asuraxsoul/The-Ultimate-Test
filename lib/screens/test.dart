@@ -24,7 +24,7 @@ class _TestScreenState extends State<TestScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               InkWell(
-                splashColor: basicColorPink,
+                splashColor: basicColorLBlue,
                 borderRadius: BorderRadius.all(
                   Radius.circular(20),
                 ),
@@ -36,7 +36,7 @@ class _TestScreenState extends State<TestScreen> {
                     borderRadius: BorderRadius.all(
                       Radius.circular(20),
                     ),
-                    border: Border.all(color: basicColorPink),
+                    border: Border.all(color: basicColorLBlue),
                   ),
                   padding: EdgeInsets.all(defaultPadding),
                   child: Column(

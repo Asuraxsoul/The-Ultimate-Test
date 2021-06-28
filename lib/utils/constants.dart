@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 Color primaryColor = Colors.blueAccent;
-Color secondaryColor = Colors.redAccent;
 Color tertiaryColor = Colors.grey;
 Color firebaseYellow = Colors.yellowAccent;
 Color firebaseOrange = Colors.orangeAccent;
@@ -12,6 +11,8 @@ Color basicColorBlue = Colors.blueAccent;
 Color basicColorLBlue = Colors.lightBlueAccent;
 Color basicColorGreen = Colors.greenAccent;
 Color basicColorTeal = Colors.tealAccent;
+Color basicColorRed = Colors.redAccent;
+Color basicColorYellow = Colors.yellowAccent;
 
 Color backgroundColor = Color(0xFFF5F5F5);
 
