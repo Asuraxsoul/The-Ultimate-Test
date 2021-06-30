@@ -34,6 +34,7 @@ dependencies:
   flutter_svg: ^0.22.0
   cloud_firestore: ^2.2.2
   intro_slider: ^3.0.1
+  syncfusion_flutter_gauges: ^19.1.69
 
 dev_dependencies:
   flutter_test:
@@ -54,7 +55,6 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    #- assets/fonts/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

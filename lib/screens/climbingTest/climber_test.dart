@@ -110,7 +110,8 @@ class _ClimberTestScreenState extends State<ClimberTestScreen> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.of(context).pushNamed('/climberTestSlider');
+                  Navigator.of(context)
+                      .pushReplacementNamed('/climberTestSlider');
                 },
               ),
             ],

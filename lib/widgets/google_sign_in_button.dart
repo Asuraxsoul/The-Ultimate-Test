@@ -42,7 +42,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 });
 
                 if (user != null) {
-                  //TODO: Add user if user email is not found in 'users' collection
+                  // Adds user if user email is not found in 'users' collection
                   await new DatabaseService().addUser(user);
                   Navigator.of(context)
                       .pushReplacementNamed('/profile', arguments: user);

@@ -12,6 +12,7 @@ import 'package:the_ultimate_test/screens/achievements.dart';
 import 'package:the_ultimate_test/screens/more_info.dart';
 import 'package:the_ultimate_test/screens/help.dart';
 import 'package:the_ultimate_test/screens/settings.dart';
+import 'package:the_ultimate_test/widgets/result_card.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -41,7 +42,12 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => ClimberTestSliderScreen());
 
       case '/climberTestResult':
-        return MaterialPageRoute(builder: (_) => ClimberTestResultScreen());
+        final results = args as Results;
+        return MaterialPageRoute(
+          builder: (_) => ClimberTestResultScreen(
+            results: results,
+          ),
+        );
 
       case '/fbiTest':
         return MaterialPageRoute(builder: (_) => FbiTestScreen());
