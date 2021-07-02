@@ -1,10 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:the_ultimate_test/utils/constants.dart';
 import 'package:the_ultimate_test/widgets/reusable_header.dart';
 import 'package:the_ultimate_test/utils/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:the_ultimate_test/screens/sign_in_screen.dart';
+import 'package:the_ultimate_test/widgets/achievement_result_card.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AchievementsScreen extends StatefulWidget {
   const AchievementsScreen({Key? key}) : super(key: key);
@@ -47,23 +51,17 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
       body: SafeArea(
         child: Container(
           child: SingleChildScrollView(
+            padding: EdgeInsets.all(defaultPadding),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                InkWell(
-                  onTap: () {},
-                  child: Text("Achievements, try use Hero widget here"),
-                ),
-                Row(),
                 StreamBuilder<QuerySnapshot>(
                   stream: firestore.collection('users').snapshots(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (!snapshot.hasData) {
                       return Center(child: const Text('Loading...'));
                     } else {
-                      print(snapshot.data!.docs.length);
-                      //print(snapshot.data.docs[0]['email']);
                       List<DocumentSnapshot> documentsUnfiltered =
                           snapshot.data!.docs;
                       List<DocumentSnapshot> documents =
@@ -137,36 +135,182 @@ class ProjectsExpansionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     PageStorageKey _projectKey = PageStorageKey('$projectKey');
 
-    return ExpansionTile(
-      key: _projectKey,
-      title: Text(
-        'name: $name',
-        style: TextStyle(fontSize: 28.0),
-      ),
-      children: <Widget>[
-        StreamBuilder(
-            stream: firestore
-                .collection('users')
-                .doc(projectKey)
-                .collection('climberTestResults')
-                .snapshots(),
-            builder:
-                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (!snapshot.hasData) return const Text('Loading...');
-              //final int surveysCount = snapshot.data.documents.length;
-              List<DocumentSnapshot> documents = snapshot.data!.docs;
+    return Column(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          child: Theme(
+            data: ThemeData().copyWith(dividerColor: Colors.transparent),
+            child: ExpansionTile(
+              tilePadding: EdgeInsets.all(defaultPadding),
+              textColor: basicColorLBlue,
+              collapsedTextColor: basicColorBlue,
+              backgroundColor: Color(0xFFE2FEFF),
+              collapsedBackgroundColor: Color(0x88E0F7FA),
+              key: _projectKey,
+              title: Text(
+                'Ultimate Climber Test Results',
+                style: TextStyle(
+                  fontSize: 24.0,
+                ),
+                textAlign: TextAlign.left,
+              ),
+              children: <Widget>[
+                StreamBuilder(
+                    stream: firestore
+                        .collection('users')
+                        .doc(projectKey)
+                        .collection('climberTestResults')
+                        .orderBy('dateTime', descending: true)
+                        .snapshots(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (!snapshot.hasData) return const Text('Loading...');
+                      List<DocumentSnapshot> documents = snapshot.data!.docs;
 
-              List<Widget> surveysList = [];
-              documents.forEach((doc) {
-                PageStorageKey _surveyKey = new PageStorageKey('${doc.id}');
-
-                surveysList.add(ListTile(
-                  key: _surveyKey,
-                  title: Text('${doc['total']}'),
-                ));
-              });
-              return Column(children: surveysList);
-            })
+                      List<Widget> testResultList = [];
+                      documents.forEach((doc) {
+                        testResultList.add(
+                          Container(
+                            padding: EdgeInsets.fromLTRB(
+                                0, 0, 0, defaultPadding / 2),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  CustomPageRoute(
+                                    AchievementResultCard(
+                                      tag: doc.id,
+                                      fingerStrength: doc['fingerStrength'],
+                                      pullUp: doc['pullUp'],
+                                      coreTime: doc['coreTime'],
+                                      hangTime: doc['hangTime'],
+                                      dateTime: DateFormat.yMMMd()
+                                          .add_jm()
+                                          .format(doc['dateTime'].toDate()),
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 10,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.8,
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        top: BorderSide(
+                                            width: 1, color: Colors.grey[300]!),
+                                      ),
+                                    ),
+                                  ),
+                                  Stack(children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Hero(
+                                          tag: '${doc.id}',
+                                          child: SvgPicture.asset(
+                                            rankPic(rankResult(doc['total'])),
+                                            height: 50,
+                                            width: 50,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Align(
+                                      alignment: Alignment.topRight,
+                                      child: Container(
+                                        width: 90,
+                                        margin: EdgeInsets.symmetric(
+                                          horizontal: defaultPadding,
+                                          vertical: defaultPadding / 2,
+                                        ),
+                                        child: Text(
+                                          '${DateFormat.yMMMd().add_jm().format(doc['dateTime'].toDate())}',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.black54,
+                                          ),
+                                          maxLines: 2,
+                                          textAlign: TextAlign.right,
+                                        ),
+                                      ),
+                                    ),
+                                  ]),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    'Total Score: ${doc['total']} / 40',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                    child: Text(
+                                      'View Details!',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        CustomPageRoute(AchievementResultCard(
+                                          tag: doc.id,
+                                          fingerStrength: doc['fingerStrength'],
+                                          pullUp: doc['pullUp'],
+                                          coreTime: doc['coreTime'],
+                                          hangTime: doc['hangTime'],
+                                          dateTime: DateFormat.yMMMd()
+                                              .add_jm()
+                                              .format(doc['dateTime'].toDate()),
+                                        )),
+                                      );
+                                    },
+                                  ),
+                                  //SizedBox(height: 5),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      });
+                      return Container(
+                        // child: Column(
+                        //   children: testResultList,
+                        // ),
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        child: ListView(
+                          children: testResultList,
+                          key: _projectKey,
+                          scrollDirection: Axis.vertical,
+                        ),
+                      );
+                    })
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: defaultPadding),
+        ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          child: Theme(
+            data: ThemeData().copyWith(dividerColor: Colors.transparent),
+            child: ExpansionTile(
+              tilePadding: EdgeInsets.all(defaultPadding),
+              textColor: basicColorTeal,
+              collapsedTextColor: basicColorGreen,
+              backgroundColor: Color(0x66A7FFEB),
+              collapsedBackgroundColor: Color(0x22A7FFEB),
+              title: Text(
+                'Ultimate FBI Test \nResults',
+                style: TextStyle(fontSize: 24.0),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

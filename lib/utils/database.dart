@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:the_ultimate_test/widgets/result_card.dart';
+import 'package:intl/intl.dart';
 
 class DatabaseService {
   Future<void> addUser(User user) async {
@@ -29,7 +30,7 @@ class DatabaseService {
   }
 
   Future<void> addClimberTestResult(
-      User? user, ConvertedResults results) async {
+      User? user, ConvertedResults results, DateTime dateTime) async {
     if (user == null) {
       //Do nothing
     } else {
@@ -50,7 +51,8 @@ class DatabaseService {
             'pullUp': results.result2,
             'coreTime': results.result3,
             'hangTime': results.result4,
-            'total': results.total
+            'total': results.total,
+            'dateTime': dateTime
           })
           .then((value) => print("Result Added"))
           .catchError((error) => print("Failed to add result: $error"));

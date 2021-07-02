@@ -24,7 +24,8 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
             children: [
               InkWell(
                 onTap: () {},
-                child: Text("View this project's details @ ..."),
+                child: Text(
+                    "View this project's details @ ..., add how this project get started and purpose"),
               ),
               Row(),
             ],

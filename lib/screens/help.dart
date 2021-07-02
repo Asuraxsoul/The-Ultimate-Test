@@ -24,8 +24,7 @@ class _HelpScreenState extends State<HelpScreen> {
             children: [
               InkWell(
                 onTap: () {},
-                child:
-                    Text("Possible to include workouts? How to use this app"),
+                child: Text("Possible to include workouts?"),
               ),
               Row(),
             ],

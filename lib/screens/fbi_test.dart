@@ -20,8 +20,23 @@ class _FbiTestScreenState extends State<FbiTestScreen> {
       body: SafeArea(
         child: Container(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("Welcome to The Ultimate Climber Test"),
+              Row(),
+              Text(
+                "Welcome to The Ultimate Climber Test",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+              SizedBox(height: 30),
+              Text(
+                "COMING SOON!",
+                style: TextStyle(
+                  fontSize: 24,
+                ),
+              ),
             ],
           ),
         ),

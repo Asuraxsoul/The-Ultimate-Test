@@ -35,6 +35,7 @@ dependencies:
   cloud_firestore: ^2.2.2
   intro_slider: ^3.0.1
   syncfusion_flutter_gauges: ^19.1.69
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

@@ -9,7 +9,22 @@ class ClimberTestScreen extends StatefulWidget {
   _ClimberTestScreenState createState() => _ClimberTestScreenState();
 }
 
-class _ClimberTestScreenState extends State<ClimberTestScreen> {
+class _ClimberTestScreenState extends State<ClimberTestScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller = AnimationController(vsync: this);
+
+  @override
+  void initState() {
+    controller.repeat(min: 0.0, max: 1.0, period: Duration(milliseconds: 2000));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,32 +102,66 @@ class _ClimberTestScreenState extends State<ClimberTestScreen> {
               SizedBox(height: 30),
               Text(
                 "Welcome to \nThe Ultimate Climber Test",
-                style: TextStyle(fontSize: 24, color: basicColorBlue),
+                style: TextStyle(fontSize: 22, color: Colors.grey[800]!),
                 maxLines: 2,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 30),
-              InkWell(
-                customBorder: CircleBorder(),
-                splashColor: basicColorLBlue,
-                child: Container(
-                  padding: EdgeInsets.all(defaultPadding * 2),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.grey[600]!),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  InkWell(
+                    customBorder: CircleBorder(),
+                    splashColor: basicColorLBlue.withOpacity(0.4),
+                    child: Container(
+                      padding: EdgeInsets.all(defaultPadding * 2),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.grey[300]!),
+                      ),
+                      child: Text(
+                        "Start",
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: basicColorLBlue,
+                        ),
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushReplacementNamed('/climberTestSlider');
+                    },
                   ),
-                  child: Text(
-                    "Start",
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: Colors.grey[800]!,
+                  RotationTransition(
+                    turns: controller,
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: Container(
+                        height: 5.0,
+                        width: 5.0,
+                        decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(5.0),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.greenAccent.withOpacity(0.5),
+                                spreadRadius: 1,
+                                blurRadius: 5,
+                                offset: Offset(-46, 0),
+                              ),
+                              BoxShadow(
+                                color: Colors.tealAccent.withOpacity(0.8),
+                                spreadRadius: 1,
+                                blurRadius: 3,
+                                offset: Offset(-46, 0),
+                              ),
+                            ]),
+                      ),
                     ),
                   ),
-                ),
-                onTap: () {
-                  Navigator.of(context)
-                      .pushReplacementNamed('/climberTestSlider');
-                },
+                ],
               ),
             ],
           ),

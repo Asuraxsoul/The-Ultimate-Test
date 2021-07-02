@@ -24,7 +24,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             children: [
               InkWell(
                 onTap: () {},
-                child: Text("Set alarm / test dates"),
+                child: Text("Set alarm / test dates, add sliders"),
               ),
               Row(),
             ],

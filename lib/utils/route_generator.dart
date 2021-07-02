@@ -54,10 +54,13 @@ class RouteGenerator {
 
       case '/achievements':
         return MaterialPageRoute(builder: (_) => AchievementsScreen());
+
       case '/aboutUs':
         return MaterialPageRoute(builder: (_) => AboutUsScreen());
+
       case '/settings':
         return MaterialPageRoute(builder: (_) => SettingsScreen());
+
       case '/help':
         return MaterialPageRoute(builder: (_) => HelpScreen());
 

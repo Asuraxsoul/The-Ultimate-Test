@@ -23,7 +23,11 @@ class ClimberTestSliderScreen extends StatefulWidget {
       new ClimberTestSliderScreenState();
 }
 
-class ClimberTestSliderScreenState extends State<ClimberTestSliderScreen> {
+class ClimberTestSliderScreenState extends State<ClimberTestSliderScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<double> animation;
+
   List<Slide> slides = [];
   String? currentSelectedValueEx1;
   String? currentSelectedValueEx2;
@@ -74,18 +78,30 @@ class ClimberTestSliderScreenState extends State<ClimberTestSliderScreen> {
   late Timer _timer;
 
   void _startTimer() {
+    controller
+      ..reset()
+      ..forward();
     setState(() {
       _counter = 5;
     });
 
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        if (_counter > 0) {
+      if (_counter > 1) {
+        controller
+          ..reset()
+          ..forward();
+        setState(() {
           _counter--;
-        } else {
+        });
+      } else if (_counter > 0) {
+        setState(() {
+          _counter--;
+        });
+      } else {
+        setState(() {
           _timer.cancel();
-        }
-      });
+        });
+      }
     });
   }
 
@@ -119,6 +135,16 @@ class ClimberTestSliderScreenState extends State<ClimberTestSliderScreen> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
+
+    controller = AnimationController(
+      duration: Duration(seconds: 1),
+      vsync: this,
+    );
+
+    animation = CurvedAnimation(
+      parent: controller,
+      curve: Curves.easeInOutCubic,
+    ).drive(Tween(begin: 0, end: 1));
 
     // Starting Slide
     slides.add(
@@ -245,20 +271,77 @@ class ClimberTestSliderScreenState extends State<ClimberTestSliderScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        padding: EdgeInsets.all(defaultPadding * 2),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.black),
-                          color: Colors.white70.withOpacity(0.7),
-                        ),
-                        child: Text(
-                          '$_counter',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 36,
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(defaultPadding * 3.5),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  color: Colors.yellowAccent.withOpacity(0.3)),
+                              color: Colors.white.withOpacity(0.1),
+                            ),
+                            child: Text(
+                              '',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 36,
+                              ),
+                            ),
                           ),
-                        ),
+                          Container(
+                            padding: EdgeInsets.all(defaultPadding * 2),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  color: Colors.yellowAccent.withOpacity(0.3)),
+                              color: Colors.white70.withOpacity(0.7),
+                            ),
+                            child: Text(
+                              '$_counter',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 36,
+                              ),
+                            ),
+                          ),
+                          RotationTransition(
+                            turns: animation,
+                            child: Align(
+                              alignment: Alignment.topCenter,
+                              child: Container(
+                                height: 5.0,
+                                width: 5.0,
+                                decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(5.0),
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.white.withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 7,
+                                        offset: Offset(0, -50),
+                                      ),
+                                      BoxShadow(
+                                        color: Colors.yellow[300]!,
+                                        spreadRadius: 1,
+                                        blurRadius: 5,
+                                        offset: Offset(0, -50),
+                                      ),
+                                      BoxShadow(
+                                        color: Colors.yellow[300]!,
+                                        spreadRadius: 1,
+                                        blurRadius: 3,
+                                        offset: Offset(0, -50),
+                                      ),
+                                    ]),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(height: defaultPadding),
                       Row(
@@ -495,7 +578,7 @@ class ClimberTestSliderScreenState extends State<ClimberTestSliderScreen> {
                         padding: EdgeInsets.all(defaultPadding * 2),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(color: Colors.black),
+                          border: Border.all(color: Colors.grey[300]!),
                           color: Colors.white70.withOpacity(0.7),
                         ),
                         child: Text(
@@ -664,7 +747,7 @@ class ClimberTestSliderScreenState extends State<ClimberTestSliderScreen> {
                         padding: EdgeInsets.all(defaultPadding * 2),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(color: Colors.black),
+                          border: Border.all(color: Colors.grey[300]!),
                           color: Colors.white70.withOpacity(0.7),
                         ),
                         child: Text(
@@ -754,6 +837,7 @@ class ClimberTestSliderScreenState extends State<ClimberTestSliderScreen> {
   void dispose() {
     SystemChrome.setEnabledSystemUIOverlays(
         [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+    controller.dispose();
     super.dispose();
   }
 

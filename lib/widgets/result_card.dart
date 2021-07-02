@@ -39,11 +39,29 @@ class _ResultCardState extends State<ResultCard> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text('${widget.title}: ${widget.result} / ${widget.total}'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              '${widget.title}: ',
+              style: TextStyle(
+                fontSize: 14,
+              ),
+            ),
+            Text(
+              '${widget.result} / ${widget.total}',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
         SizedBox(height: 10),
         Container(
-          height: 60,
-          width: 60,
+          height: 70,
+          width: 70,
           child: SfRadialGauge(
             axes: [
               RadialAxis(

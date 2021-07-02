@@ -5,6 +5,7 @@ import 'package:the_ultimate_test/utils/database.dart';
 import 'package:the_ultimate_test/widgets/result_card.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 
 class ClimberTestResultScreen extends StatefulWidget {
   final Results results;
@@ -75,7 +76,7 @@ class _ClimberTestResultState extends State<ClimberTestResultScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           'The Ultimate Climber Test',
@@ -182,108 +183,155 @@ class _ClimberTestResultState extends State<ClimberTestResultScreen> {
       ),
       body: SafeArea(
         child: Container(
-          decoration: BoxDecoration(color: Colors.white70),
+          decoration: BoxDecoration(
+            color: Colors.white70,
+            image: DecorationImage(
+              image: AssetImage("assets/images/lighthouseWall.jpg"),
+              fit: BoxFit.fitHeight,
+              colorFilter: new ColorFilter.mode(
+                  Colors.black.withOpacity(0.1), BlendMode.dstATop),
+            ),
+          ),
           padding: EdgeInsets.fromLTRB(defaultPadding, defaultPadding,
               defaultPadding, defaultPadding * 2.5),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("Results"),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ResultCard(
-                    title: "Finger Strength",
-                    result: resultConverter(widget.results.result1),
-                    total: 10,
-                  ),
-                  ResultCard(
-                    title: "Pull Up Strength",
-                    result: resultConverter(widget.results.result2),
-                    total: 10,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ResultCard(
-                    title: "Core Strength",
-                    result: resultConverter(widget.results.result3),
-                    total: 10,
-                  ),
-                  ResultCard(
-                    title: "Bar Hang Strength",
-                    result: resultConverter(widget.results.result4),
-                    total: 10,
-                  ),
-                ],
-              ),
               Text(
-                  "${resultConverter(widget.results.result1) + resultConverter(widget.results.result2) + resultConverter(widget.results.result3) + resultConverter(widget.results.result4)} / 40"),
-              Container(
-                height: 100,
-                width: 100,
-                child: SfRadialGauge(
-                  axes: [
-                    RadialAxis(
-                      minimum: 0,
-                      maximum: 100,
-                      showLabels: false,
-                      showTicks: false,
-                      startAngle: 270,
-                      endAngle: 270,
-                      annotations: <GaugeAnnotation>[
-                        GaugeAnnotation(
-                            positionFactor: 0.1,
-                            angle: 90,
-                            widget: Text(
-                              '${(resultConverter(widget.results.result1) + resultConverter(widget.results.result2) + resultConverter(widget.results.result3) + resultConverter(widget.results.result4)) * 100 / 40}%',
-                              style: TextStyle(fontSize: 11),
-                            ))
-                      ],
-                      axisLineStyle: AxisLineStyle(
-                        thickness: 0.1,
-                        color: const Color.fromARGB(30, 0, 169, 181),
-                        thicknessUnit: GaugeSizeUnit.factor,
-                      ),
-                      pointers: <GaugePointer>[
-                        RangePointer(
-                            value: ((resultConverter(widget.results.result1) +
-                                    resultConverter(widget.results.result2) +
-                                    resultConverter(widget.results.result3) +
-                                    resultConverter(widget.results.result4)) *
-                                100 /
-                                40),
-                            width: 0.1,
-                            sizeUnit: GaugeSizeUnit.factor,
-                            cornerStyle: CornerStyle.startCurve,
-                            gradient: const SweepGradient(colors: <Color>[
-                              Color(0xFF00a9b5),
-                              Color(0xFFa4edeb)
-                            ], stops: <double>[
-                              0.25,
-                              0.75
-                            ])),
-                        MarkerPointer(
-                          value: ((resultConverter(widget.results.result1) +
-                                  resultConverter(widget.results.result2) +
-                                  resultConverter(widget.results.result3) +
-                                  resultConverter(widget.results.result4)) *
-                              100 /
-                              40),
-                          markerType: MarkerType.circle,
-                          color: const Color(0xFF87e8e8),
-                        )
-                      ],
-                    ),
-                  ],
+                "Results",
+                style: TextStyle(
+                  fontSize: 20,
                 ),
               ),
-              Text("Your Score"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    child: ResultCard(
+                      title: "Finger Strength",
+                      result: resultConverter(widget.results.result1),
+                      total: 10,
+                    ),
+                  ),
+                  Expanded(
+                    child: ResultCard(
+                      title: "Pull Up Strength",
+                      result: resultConverter(widget.results.result2),
+                      total: 10,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    child: ResultCard(
+                      title: "Core Strength",
+                      result: resultConverter(widget.results.result3),
+                      total: 10,
+                    ),
+                  ),
+                  Expanded(
+                    child: ResultCard(
+                      title: "Bar Hang Strength",
+                      result: resultConverter(widget.results.result4),
+                      total: 10,
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    "${resultConverter(widget.results.result1) + resultConverter(widget.results.result2) + resultConverter(widget.results.result3) + resultConverter(widget.results.result4)} / 40",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    height: 100,
+                    width: 100,
+                    child: SfRadialGauge(
+                      axes: [
+                        RadialAxis(
+                          minimum: 0,
+                          maximum: 100,
+                          showLabels: false,
+                          showTicks: false,
+                          startAngle: 270,
+                          endAngle: 270,
+                          annotations: <GaugeAnnotation>[
+                            GaugeAnnotation(
+                                positionFactor: 0.1,
+                                angle: 90,
+                                widget: Text(
+                                  ' ${(resultConverter(widget.results.result1) + resultConverter(widget.results.result2) + resultConverter(widget.results.result3) + resultConverter(widget.results.result4)) * 100 / 40}%',
+                                  style: TextStyle(fontSize: 16),
+                                ))
+                          ],
+                          axisLineStyle: AxisLineStyle(
+                            thickness: 0.1,
+                            color: const Color.fromARGB(30, 0, 169, 181),
+                            thicknessUnit: GaugeSizeUnit.factor,
+                          ),
+                          pointers: <GaugePointer>[
+                            RangePointer(
+                                value:
+                                    ((resultConverter(widget.results.result1) +
+                                            resultConverter(
+                                                widget.results.result2) +
+                                            resultConverter(
+                                                widget.results.result3) +
+                                            resultConverter(
+                                                widget.results.result4)) *
+                                        100 /
+                                        40),
+                                width: 0.1,
+                                sizeUnit: GaugeSizeUnit.factor,
+                                cornerStyle: CornerStyle.startCurve,
+                                gradient: const SweepGradient(colors: <Color>[
+                                  Color(0xFF00a9b5),
+                                  Color(0xFFa4edeb)
+                                ], stops: <double>[
+                                  0.25,
+                                  0.75
+                                ])),
+                            MarkerPointer(
+                              value: ((resultConverter(widget.results.result1) +
+                                      resultConverter(widget.results.result2) +
+                                      resultConverter(widget.results.result3) +
+                                      resultConverter(widget.results.result4)) *
+                                  100 /
+                                  40),
+                              markerType: MarkerType.circle,
+                              color: const Color(0xFF87e8e8),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "Your Score",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
               Text(
-                  "Click on the info icon at the top right to view your potential climbing grade"),
+                "Click on the info icon at the top right to view your potential climbing grade",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey[600]!,
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             ],
           ),
         ),
@@ -360,7 +408,8 @@ class _ClimberTestResultState extends State<ClimberTestResultScreen> {
                     cResults.result2 +
                     cResults.result3 +
                     cResults.result4;
-                DatabaseService().addClimberTestResult(user, cResults);
+                DatabaseService()
+                    .addClimberTestResult(user, cResults, DateTime.now());
                 Navigator.of(context).pushReplacementNamed('/achievements');
                 showDialog(
                     context: context,
