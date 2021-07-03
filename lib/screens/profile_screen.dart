@@ -48,18 +48,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Colors.transparent,
       appBar: ReusableHeader.getAppBar("Profile"),
       drawer: ReusableHeader.getDrawer(context),
       body: SafeArea(
-        child: Padding(
+        child: Container(
           padding: const EdgeInsets.only(
             left: 16.0,
             right: 16.0,
-            bottom: 20.0,
+            bottom: 50.0,
+            top: 50.0,
+          ),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: FractionalOffset.topCenter,
+              end: FractionalOffset.bottomCenter,
+              colors: [
+                Color(0xFFA6C1EE),
+                Color(0xFFC9C2EB),
+              ],
+            ),
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 children: [
@@ -87,41 +98,62 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                         ),
-                  SizedBox(height: 16.0),
+                  SizedBox(height: 20.0),
                   Text(
-                    'Hello',
+                    'Hello,',
                     style: TextStyle(
-                      color: tertiaryColor,
-                      fontSize: 26,
+                      color: Colors.grey[600]!,
+                      fontSize: 24,
                     ),
                   ),
-                  SizedBox(height: 8.0),
+                  SizedBox(height: 10.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '${_user.displayName!}',
+                        style: TextStyle(
+                          color: basicColorPurple,
+                          fontSize: 26,
+                        ),
+                      ),
+                      Text(
+                        ' !',
+                        style: TextStyle(
+                          color: Colors.grey[600]!,
+                          fontSize: 24,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 15.0),
                   Text(
-                    _user.displayName!,
+                    'you are signed in as',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: basicColorPurple,
-                      fontSize: 26,
+                      color: Colors.grey[600]!,
+                      fontSize: 18,
+                      letterSpacing: 0.5,
                     ),
                   ),
-                  SizedBox(height: 8.0),
                   Text(
-                    'you are signed in as ( ${_user.email!} )',
+                    '( ${_user.email!} )',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: basicColorGreen,
                       fontSize: 20,
                       letterSpacing: 0.5,
+                      fontStyle: FontStyle.italic,
                     ),
                   ),
                 ],
               ),
               Column(
                 children: [
-                  SizedBox(height: defaultPadding * 2),
                   Text(
                     'To sign out of your account, click the "Sign Out"\nbutton below.',
                     style: TextStyle(
-                      color: tertiaryColor,
+                      color: Colors.grey[600]!,
                       fontSize: 14,
                       letterSpacing: 0.2,
                     ),

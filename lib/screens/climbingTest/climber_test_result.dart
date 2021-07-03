@@ -5,7 +5,6 @@ import 'package:the_ultimate_test/utils/database.dart';
 import 'package:the_ultimate_test/widgets/result_card.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:intl/intl.dart';
 
 class ClimberTestResultScreen extends StatefulWidget {
   final Results results;

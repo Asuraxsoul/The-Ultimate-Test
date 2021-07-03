@@ -18,6 +18,17 @@ class _HelpScreenState extends State<HelpScreen> {
       drawer: ReusableHeader.getDrawer(context),
       body: SafeArea(
         child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: FractionalOffset.topCenter,
+              end: FractionalOffset.bottomCenter,
+              colors: [
+                Color(0xFFD7FFFE),
+                Color(0xFFF5E6FA),
+                Color(0xFFE3FDF5),
+              ],
+            ),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,

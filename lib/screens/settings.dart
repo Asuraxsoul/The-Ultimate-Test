@@ -18,6 +18,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
       drawer: ReusableHeader.getDrawer(context),
       body: SafeArea(
         child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: FractionalOffset.topCenter,
+              end: FractionalOffset.bottomCenter,
+              colors: [
+                Color(0xFFace0f9),
+                Color(0xFFfff1eb),
+              ],
+            ),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,

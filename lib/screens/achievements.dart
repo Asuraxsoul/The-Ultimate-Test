@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:the_ultimate_test/utils/constants.dart';
 import 'package:the_ultimate_test/widgets/reusable_header.dart';
-import 'package:the_ultimate_test/utils/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:the_ultimate_test/screens/sign_in_screen.dart';
@@ -45,11 +44,22 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Colors.transparent,
       appBar: ReusableHeader.getAppBar("Your Achievements"),
       drawer: ReusableHeader.getDrawer(context),
       body: SafeArea(
         child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: FractionalOffset.topCenter,
+              end: FractionalOffset.bottomCenter,
+              colors: [
+                Color(0xFF330867),
+                Color(0xFF30cfd0),
+              ],
+            ),
+          ),
+          height: MediaQuery.of(context).size.height,
           child: SingleChildScrollView(
             padding: EdgeInsets.all(defaultPadding),
             child: Column(
@@ -143,10 +153,10 @@ class ProjectsExpansionTile extends StatelessWidget {
             data: ThemeData().copyWith(dividerColor: Colors.transparent),
             child: ExpansionTile(
               tilePadding: EdgeInsets.all(defaultPadding),
-              textColor: basicColorLBlue,
-              collapsedTextColor: basicColorBlue,
-              backgroundColor: Color(0xFFE2FEFF),
-              collapsedBackgroundColor: Color(0x88E0F7FA),
+              textColor: Colors.lightBlueAccent,
+              collapsedTextColor: Color(0xFF82BBFF),
+              backgroundColor: Color(0x77A7FFEB),
+              collapsedBackgroundColor: Color(0x33A7FFEB),
               key: _projectKey,
               title: Text(
                 'Ultimate Climber Test Results',

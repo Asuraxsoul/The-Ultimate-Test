@@ -14,7 +14,7 @@ class _TestScreenState extends State<TestScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Color(0xFFBAE3FF),
       appBar: ReusableHeader.getAppBar("Challenge yourself"),
       drawer: ReusableHeader.getDrawer(context),
       body: SafeArea(
@@ -24,7 +24,7 @@ class _TestScreenState extends State<TestScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               InkWell(
-                splashColor: basicColorLBlue,
+                splashColor: basicColorBlue,
                 borderRadius: BorderRadius.all(
                   Radius.circular(20),
                 ),
@@ -36,7 +36,7 @@ class _TestScreenState extends State<TestScreen> {
                     borderRadius: BorderRadius.all(
                       Radius.circular(20),
                     ),
-                    border: Border.all(color: basicColorLBlue),
+                    border: Border.all(color: Color(0xFF44CCFF), width: 3),
                   ),
                   padding: EdgeInsets.all(defaultPadding),
                   child: Column(
@@ -70,7 +70,7 @@ class _TestScreenState extends State<TestScreen> {
                     borderRadius: BorderRadius.all(
                       Radius.circular(20),
                     ),
-                    border: Border.all(color: basicColorGreen),
+                    border: Border.all(color: basicColorTeal, width: 3),
                   ),
                   padding: EdgeInsets.all(defaultPadding),
                   child: Column(
