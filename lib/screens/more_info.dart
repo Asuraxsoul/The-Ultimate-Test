@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:the_ultimate_test/utils/constants.dart';
 import 'package:the_ultimate_test/widgets/reusable_header.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'dart:async';
+
+Future<void> _launchURL(String url) async {
+  String urL = 'https://github.com/Asuraxsoul/The-Ultimate-Test';
+  if (await canLaunch(urL)) {
+    await launch(
+      url,
+      forceSafariVC: false,
+      forceWebView: false,
+      headers: <String, String>{'my_header_key': 'my_header_value'},
+    );
+  } else {
+    throw 'Unable to launch $url';
+  }
+}
 
 class AboutUsScreen extends StatefulWidget {
   const AboutUsScreen({Key? key}) : super(key: key);
@@ -106,13 +122,91 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                       ),
                     ),
                     SizedBox(height: 10),
-                    Text(
-                      'To view source code, visit: <github link>',
-                      style: TextStyle(
-                        fontSize: 15,
-                        letterSpacing: 0.8,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          'To view source code, visit:  ',
+                          style: TextStyle(
+                            fontSize: 15,
+                            letterSpacing: 0.8,
+                          ),
+                        ),
+                        MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      backgroundColor:
+                                          Colors.grey[700]!.withOpacity(0.8),
+                                      insetPadding:
+                                          EdgeInsets.all(defaultPadding),
+                                      title: Text(
+                                        "Visit Asuraxsoul Github Repo?",
+                                        style: TextStyle(
+                                          fontSize: 26,
+                                          color: Colors.pinkAccent,
+                                        ),
+                                      ),
+                                      content: Text(
+                                        'Redirecting you to view source code for The-Ultimate-Test app!',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 20,
+                                          letterSpacing: 2,
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: new Icon(
+                                            Icons.close,
+                                            color: Colors.redAccent,
+                                            size: 30,
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: new Icon(
+                                            Icons.done,
+                                            color: Colors.lightBlueAccent,
+                                            size: 30,
+                                          ),
+                                          onPressed: () {
+                                            _launchURL(
+                                                "https://github.com/Asuraxsoul/The-Ultimate-Test");
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            },
+                            child: Container(
+                              child: Text(
+                                'Asuraxsoul Github',
+                                style: TextStyle(
+                                  color: Colors.lightBlueAccent[100]!,
+                                  fontSize: 17,
+                                  letterSpacing: 0.8,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
+                    SizedBox(height: 5),
+                    Text('https://github.com/Asuraxsoul/The-Ultimate-Test',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontStyle: FontStyle.italic,
+                          decoration: TextDecoration.underline,
+                        )),
                   ],
                 ),
               ),
@@ -147,7 +241,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                     Text(
                       'viscountlapiz@gmail.com',
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 17,
                         letterSpacing: 1,
                         color: Colors.white70,
                         fontStyle: FontStyle.italic,

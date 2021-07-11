@@ -41,8 +41,10 @@ class _HelpScreenState extends State<HelpScreen> {
                   title: 'Workout Challenges',
                   description: 'Challenge your friends!',
                   longDescription:
-                      '\nMany things in life is worth competing for!',
+                      '\nMany things in life are worth competing for!',
                   image: 'assets/images/challenge.PNG',
+                  workoutCount: 8,
+                  route: '/workoutChallenge',
                 ),
               ),
               Expanded(
@@ -55,6 +57,8 @@ class _HelpScreenState extends State<HelpScreen> {
                   longDescription:
                       '\nNever give up as even stagnation is temporary!',
                   image: 'assets/images/progression.jpg',
+                  workoutCount: 3,
+                  route: '/workoutProgression',
                 ),
               ),
               Expanded(
@@ -66,6 +70,8 @@ class _HelpScreenState extends State<HelpScreen> {
                   description: 'Keep fit and active!',
                   longDescription: '\nWhat contributes to a great lifestyle?',
                   image: 'assets/images/healthy.jpg',
+                  workoutCount: 2,
+                  route: '/workoutLifestyle',
                 ),
               ),
               Row(),

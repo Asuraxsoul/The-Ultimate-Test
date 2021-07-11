@@ -10,9 +10,12 @@ import 'package:the_ultimate_test/screens/climbingTest/climber_test_result.dart'
 import 'package:the_ultimate_test/screens/fbi_test.dart';
 import 'package:the_ultimate_test/screens/achievements.dart';
 import 'package:the_ultimate_test/screens/more_info.dart';
-import 'package:the_ultimate_test/screens/help.dart';
+import 'package:the_ultimate_test/screens/workoutRec/help.dart';
 import 'package:the_ultimate_test/screens/settings.dart';
 import 'package:the_ultimate_test/widgets/result_card.dart';
+import 'package:the_ultimate_test/screens/workoutRec/workout_progression.dart';
+import 'package:the_ultimate_test/screens/workoutRec/workout_challenge.dart';
+import 'package:the_ultimate_test/screens/workoutRec/workout_lifestyle.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -63,6 +66,15 @@ class RouteGenerator {
 
       case '/help':
         return MaterialPageRoute(builder: (_) => HelpScreen());
+
+      case '/workoutProgression':
+        return MaterialPageRoute(builder: (_) => WorkoutProgressionScreen());
+
+      case '/workoutChallenge':
+        return MaterialPageRoute(builder: (_) => WorkoutChallengeScreen());
+
+      case '/workoutLifestyle':
+        return MaterialPageRoute(builder: (_) => WorkoutLifestyleScreen());
 
       default:
         return _errorRoute();

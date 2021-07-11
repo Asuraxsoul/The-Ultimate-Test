@@ -1,16 +1,75 @@
-# the_ultimate_test
+# The Ultimate Test Mobile Application
 
-A new Flutter application.
+## Description
+- This application was inspired by a famous professional climber Magnus Midtbø, where he tried the
+ ultimate climber test. This application incorporated the idea and included some extra challenges
+ as well.
 
-## Getting Started
+## Purpose of Application
+- This application aims to not only improve my understanding for application development, but also
+encourages people to set and maintain fitness goals in the long run.
 
-This project is a starting point for a Flutter application.
+## Learning Points
+* Mobile application development
+* Firebase firestore data storing and reading
+* Widget lifecycles
+* Animation and ticks
+* UI / UX designs
+* Google Sign in
 
-A few resources to get you started if this is your first Flutter project:
+### Splash Feature
+>
+>> A ticker was used to animate the bouncing animation image and changes to another image after some
+time. This is just an example that I used to capture attention.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Google Sign-in > Profile Features
+>
+>> Google Sign-in page allows sign in via only google account and user will be brought to the
+ profile page. Auto login feature is also implemented so if user did not log out, he would not need
+ to sign in again after he restart the application.
+>> The Profile page displays some of user's google account information such as display picture and
+ the email user used to sign in. Sign out feature is included here as well.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Test Feature
+>
+>> Test tab first brings user choose a test user wants to take. Then, upon starting the test, user
+ will need to carry out the test. Only the Ultimate Climber Test is available and there are 4 parts
+ to it. After filling in the results, an overall results page will be generated for the user which
+ shows the user what is the maximum potential climbing grade user is actually able to accomplish.
+ Then, user can choose to redo the test or save the test.
+
+### Achievements Page & Firestore
+>
+>> User is able to see their past test results sorted by date.
+
+### Settings Feature
+>
+>> User is able to configure their personal details and even set test dates that comes with
+ reminders.
+
+### Workout Recommendations Feature
+>
+>> User is able to check out this page for workout challenges or workout lifestyles or workout
+ progressions. This is to let user achieve their intended results in the tests at a faster and a
+ more consistent manner.
+
+### About Us Feature
+>
+>> Presents behind the scenes information about the application, and gives user a way to contact
+ in case there are any queries.
+
+## Tech Stack
+* Flutter SDK (with null-safety)
+    - firebase_core: ^1.3.0
+    - firebase_auth: ^1.4.1
+    - google_sign_in: ^5.0.4
+    - flutter_svg: ^0.22.0
+    - cloud_firestore: ^2.2.2
+    - intro_slider: ^3.0.1
+    - syncfusion_flutter_gauges: ^19.1.69
+    - intl: ^0.17.0
+    - url_launcher: ^6.0.8
+    - flutter_switch: ^0.3.2
+* Dart SDK: ">=2.12.0 <3.0.0"
+* Flutter Fire (google firebase firestore)
+* Google Authentication (google sign-in)

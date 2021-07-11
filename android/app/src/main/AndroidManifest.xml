@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="asuraxsoul.the_ultimate_test">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="the_ultimate_test"
+        android:label="The Ultimate Test"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
