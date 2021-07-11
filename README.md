@@ -18,12 +18,12 @@ encourages people to set and maintain fitness goals in the long run.
 * Google Sign in
 
 ### Splash Feature
->
+> https://user-images.githubusercontent.com/54731174/125184483-d42e5780-e250-11eb-8f3f-7ed70edf2a6b.mp4
 >> A ticker was used to animate the bouncing animation image and changes to another image after some
 time. This is just an example that I used to capture attention.
 
 ### Google Sign-in > Profile Features
->
+> https://user-images.githubusercontent.com/54731174/125184488-e27c7380-e250-11eb-9747-5502ad677dd8.mp4
 >> Google Sign-in page allows sign in via only google account and user will be brought to the
  profile page. Auto login feature is also implemented so if user did not log out, he would not need
  to sign in again after he restart the application.
