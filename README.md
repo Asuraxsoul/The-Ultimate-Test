@@ -41,7 +41,7 @@
 >> User is able to check out this page for workout challenges or workout lifestyles or workout progressions. This is to let user achieve their intended results in the tests at a faster and a more consistent manner.
 
 ### About Us Feature
-> https://user-images.githubusercontent.com/54731174/125184959-700d9280-e254-11eb-90d9-c65b317fcb1c.mp4
+> https://user-images.githubusercontent.com/54731174/125185046-df838200-e254-11eb-8fd5-a44c9627d93f.mp4
 >> Presents behind the scenes information about the application, and gives user a way to contact in case there are any queries.
 
 ## Tech Stack
